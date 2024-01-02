@@ -9,6 +9,6 @@ namespace OrderFoodOnline.Interface.Irepository.IComment
         Task<List<Restaurant_En>> BestRestaurant();
         Task<List<Restaurant_En>> BestRestaurantCity(string city);
 
-        Task CalculateScoreOfRestaurant(int RestaurantId);
+       float CalculateScoreOfRestaurant(int RestaurantId);
     }
 }

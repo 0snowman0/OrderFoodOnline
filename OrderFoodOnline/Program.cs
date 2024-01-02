@@ -6,6 +6,7 @@ using Microsoft.OpenApi.Models;
 using OrderFoodOnline.Dto.Product.Food.Command;
 using OrderFoodOnline.Dto.User.Delivery.Command;
 using OrderFoodOnline.Dto.User.user.Quesries;
+using OrderFoodOnline.Email;
 using OrderFoodOnline.generic;
 using OrderFoodOnline.Interface.Irepository.IComment;
 using OrderFoodOnline.Interface.Irepository.IDelivery;
@@ -116,6 +117,7 @@ builder.Services.AddScoped<IFileService , FileService>();
 builder.Services.AddScoped<Istatus , StatusFunction>();
 builder.Services.AddScoped<IAuthenticationTools , AuthenticationTools>();
 builder.Services.AddScoped<IuserService, UserService>();
+builder.Services.AddScoped<LocalMailService>();
 #endregion
 
 #endregion

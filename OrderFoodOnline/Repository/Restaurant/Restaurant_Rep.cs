@@ -24,5 +24,9 @@ namespace OrderFoodOnline.Repository.Restaurant
             return ids;
         }
 
+        public List<Restaurant_En> GetAllWithOutAsync()
+        {
+            return _context.restaurant_Ens.ToList();
+        }
     }
 }

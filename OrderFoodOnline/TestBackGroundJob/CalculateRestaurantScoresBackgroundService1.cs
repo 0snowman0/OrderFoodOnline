@@ -1,46 +1,46 @@
-﻿namespace OrderFoodOnline.TestBackGroundJob
+﻿using OrderFoodOnline.Interface.Irepository.IComment;
+using OrderFoodOnline.Interface.Irepository.Irestaurant;
+using OrderFoodOnline.Model.User;
+
+
+namespace OrderFoodOnline.TestBackGroundJob
 {
     public class CalculateRestaurantScoresBackgroundService1 : IHostedService, IDisposable
     {
         private Timer? _timer = null;
         private int executionCount = 0;
-
-        public CalculateRestaurantScoresBackgroundService1(Timer? timer, int executionCount)
+        private readonly IRestaurant _restaurant;
+        private readonly IScore _score;
+        public CalculateRestaurantScoresBackgroundService1(Timer? timer, int executionCount, IRestaurant restaurant, IScore score)
         {
             _timer = timer;
             this.executionCount = executionCount;
+            _restaurant = restaurant;
+            _score = score;
         }
 
-        public Task StartAsync(CancellationToken stoppingToken)
+        public async Task StartAsync(CancellationToken stoppingToken)
         {
-
             _timer = new Timer(DoWork, null, TimeSpan.Zero,
-            TimeSpan.FromHours(3));
-
-            return Task.CompletedTask;
+             TimeSpan.FromHours(24));
+            
         }
 
         private void DoWork(object? state)
         {
+
             // Do your work here
 
             // For example, you can calculate the scores for all restaurants
 
-            var restaurants = GetAllRestaurants();
+            List<Restaurant_En> restaurants = (List<Restaurant_En>)  _restaurant.GetAllWithOutAsync();
 
-            for (int i = 0; i < restaurants.Count; i++)
+            foreach(var restaurant in restaurants)
             {
-                var restaurant = restaurants[i];
-
-                // Calculate the score for the restaurant
-
-                var score = CalculateScore(restaurant);
-
-                // Save the score for the restaurant
-
-                SaveScore(restaurant, score);
+                 _score.CalculateScoreOfRestaurant(restaurant.Id);
             }
 
+            _restaurant.Save();
         }
 
         public Task StopAsync(CancellationToken stoppingToken)

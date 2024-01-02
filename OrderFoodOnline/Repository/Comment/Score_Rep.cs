@@ -4,6 +4,7 @@ using OrderFoodOnline.Interface.Irepository.IComment;
 using OrderFoodOnline.Model.Comment;
 using OrderFoodOnline.Model.ConnectionToBank;
 using OrderFoodOnline.Model.User;
+using System.Linq;
 
 namespace OrderFoodOnline.Repository.Comment
 {
@@ -29,10 +30,20 @@ namespace OrderFoodOnline.Repository.Comment
             return topRes;
         }
 
-        public async Task CalculateScoreOfRestaurant(int RestaurantId)
+        public  float CalculateScoreOfRestaurant(int RestaurantId)
         {
+            var scores = _contxet.score_Ens.Where(p => p.Restaurant_Id == RestaurantId).ToList();
 
 
+            int sum = 0 ,  count;
+            foreach (var score in scores)
+            {
+                sum += score.score;
+            }
+            count = scores.Count();
+            float ave = (float)sum / count;
+
+            return ave;
         }
     }
 }
