@@ -172,7 +172,7 @@ namespace OrderFoodOnline.Controllers.User.AuthorizationControllers
 
 
         #region Private Methhod
-        private async void SetRefreshToken(RefreshToken_En newRefreshToken, User_En user)
+        private async Task SetRefreshToken(RefreshToken_En newRefreshToken, User_En user)
         {
             user.RefreshToken = newRefreshToken.Token;
             user.TokenCreated = newRefreshToken.Created;

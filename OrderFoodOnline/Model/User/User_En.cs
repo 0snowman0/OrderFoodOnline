@@ -13,6 +13,7 @@ namespace OrderFoodOnline.Model.User
         public DateTime TokenExpires { get; set; }
         public Role_em role { get; set; }
         public string email { get; set; } = null!;
+        public string Phone { get; set; } = null!;
 
     }
 }

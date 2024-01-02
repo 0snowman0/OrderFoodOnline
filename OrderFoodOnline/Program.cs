@@ -39,6 +39,7 @@ using OrderFoodOnline.Validate.Product.Food;
 using OrderFoodOnline.Validate.User;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;
+using ZarinPal.Class;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -90,34 +91,64 @@ builder.Services.AddCors(options => options.AddPolicy(name: "NgOrigins",
 #region Add Dep ...
 
 #region Dep for tbl
+
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
 builder.Services.AddScoped<IRestaurant , Restaurant_Rep>();
+
 builder.Services.AddScoped<IDelivery, Delivery_Rep>();
+
 builder.Services.AddScoped<IFood , Food_Rep>();
+
 builder.Services.AddScoped<Iuser , User_Rep>();
+
 builder.Services.AddScoped<IDelivery_Restaurant_Relation, Delivery_Restaurant_Relation_Rep>();
+
 builder.Services.AddScoped<ILocation , Location_Rep>();
+
 builder.Services.AddScoped<ILocation_Restaurant, Location_Restaurant_Rep>();
+
 builder.Services.AddScoped<IRecruitment, Recruitment_Rep>();
+
 builder.Services.AddScoped<ICommentFood , CommentFood_Rep>();
+
 builder.Services.AddScoped<ICommentRestaurant, CommentRestaurant_Rep>();
+
 builder.Services.AddScoped<IScore, Score_Rep>();
+
 #endregion
 
 
 #region Dep for Validation
+
 builder.Services.AddScoped<IValidator<Food_Create_Dto> , Food_Create_V>();
+
 builder.Services.AddScoped<IValidator<Food_Update_Dto>, Food_Update_V>();
+
 builder.Services.AddScoped<IValidator<User_ForRegister_Dto> , User_Create_V>();
+
 builder.Services.AddScoped<IValidator<Delivery_Create_Dto>, Delivery_Create_V>();
+
 #endregion
 
 #region Oders
+
 builder.Services.AddScoped<IFileService , FileService>();
+
 builder.Services.AddScoped<Istatus , StatusFunction>();
+
 builder.Services.AddScoped<IAuthenticationTools , AuthenticationTools>();
+
 builder.Services.AddScoped<IuserService, UserService>();
+
 builder.Services.AddScoped<LocalMailService>();
+
+builder.Services.AddScoped<Payment, ZarinPal.Class.Payment>();
+
+builder.Services.AddSingleton<ZarinPal.Class.Authority>();
+
+builder.Services.AddTransient<ZarinPal.Class.Transactions>();
+
 #endregion
 
 #endregion

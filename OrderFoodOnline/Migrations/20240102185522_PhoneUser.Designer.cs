@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OrderFoodOnline.Model.ConnectionToBank;
 
@@ -11,9 +12,11 @@ using OrderFoodOnline.Model.ConnectionToBank;
 namespace OrderFoodOnline.Migrations
 {
     [DbContext(typeof(Context_En))]
-    partial class Context_EnModelSnapshot : ModelSnapshot
+    [Migration("20240102185522_PhoneUser")]
+    partial class PhoneUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
