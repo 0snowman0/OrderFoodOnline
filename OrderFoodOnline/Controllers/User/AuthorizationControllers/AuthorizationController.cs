@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using OrderFoodOnline.Dto.Product.Food.Command;
+using OrderFoodOnline.Dto.User.user.Command;
 using OrderFoodOnline.Dto.User.user.Quesries;
 using OrderFoodOnline.Enum.User;
 using OrderFoodOnline.Interface.Irepository.IUser;
@@ -56,7 +57,7 @@ namespace OrderFoodOnline.Controllers.User.AuthorizationControllers
 
 
         [HttpPost("register")]
-        public async Task<ActionResult<User_En>> Register(User_Dto request)
+        public async Task<ActionResult<User_En>> Register(User_ForRegister_Dto request)
         {
             //var Validate = await _validator_user_V.ValidateAsync(request);
 
@@ -71,6 +72,7 @@ namespace OrderFoodOnline.Controllers.User.AuthorizationControllers
             user.PasswordSalt = passwordSalt;
             user.role = Role_em.restaurant;
             user.email = request.email;
+            user.Phone = request.Phone;
 
             await _user.Add(user);
 

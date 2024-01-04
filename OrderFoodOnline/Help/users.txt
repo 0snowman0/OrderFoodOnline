@@ -3,3 +3,12 @@
   "username": "restaurant",
   "password": "234"
 }
+
+
+
+
+{
+  "email": "TestUser@gmail.com",
+  "username": "TestUser",
+  "password": "123"
+}

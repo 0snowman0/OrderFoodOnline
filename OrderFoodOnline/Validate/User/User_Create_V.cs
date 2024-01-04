@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using OrderFoodOnline.Dto.User.user.Quesries;
+using OrderFoodOnline.Dto.User.user.Command;
 
 namespace OrderFoodOnline.Validate.User
 {

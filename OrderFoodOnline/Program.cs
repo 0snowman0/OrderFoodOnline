@@ -5,7 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using OrderFoodOnline.Dto.Product.Food.Command;
 using OrderFoodOnline.Dto.User.Delivery.Command;
-using OrderFoodOnline.Dto.User.user.Quesries;
+using OrderFoodOnline.Dto.User.user.Command;
 using OrderFoodOnline.Email;
 using OrderFoodOnline.generic;
 using OrderFoodOnline.Interface.Irepository.IComment;
@@ -14,10 +14,12 @@ using OrderFoodOnline.Interface.Irepository.IFood;
 using OrderFoodOnline.Interface.Irepository.IImage;
 using OrderFoodOnline.Interface.Irepository.Ijob.IRecruitment;
 using OrderFoodOnline.Interface.Irepository.ILocation;
+using OrderFoodOnline.Interface.Irepository.IPayment;
 using OrderFoodOnline.Interface.Irepository.Irestaurant;
 using OrderFoodOnline.Interface.Irepository.IUser;
 using OrderFoodOnline.Interface.IT_R_T.DeliveryAndRestaurant;
 using OrderFoodOnline.Interface.IT_R_T.LocationAndRestaurant;
+using OrderFoodOnline.Interface.Itools.HelpFunction;
 using OrderFoodOnline.Interface.Itools.ImanageProgram.Istatus;
 using OrderFoodOnline.Interface.Itools.IUserService;
 using OrderFoodOnline.Model.ConnectionToBank;
@@ -26,11 +28,13 @@ using OrderFoodOnline.Model.User;
 using OrderFoodOnline.Repository.Comment;
 using OrderFoodOnline.Repository.Delivery;
 using OrderFoodOnline.Repository.Food;
+using OrderFoodOnline.Repository.HelpFunction;
 using OrderFoodOnline.Repository.Image;
 using OrderFoodOnline.Repository.IT_R_T.DeliveryAndRestaurant;
 using OrderFoodOnline.Repository.IT_R_T.LocationAndRestaurant;
 using OrderFoodOnline.Repository.job.Recruitment;
 using OrderFoodOnline.Repository.Location;
+using OrderFoodOnline.Repository.payment;
 using OrderFoodOnline.Repository.Restaurant;
 using OrderFoodOnline.Repository.Tools.UserAuth;
 using OrderFoodOnline.Repository.user_rep;
@@ -116,6 +120,8 @@ builder.Services.AddScoped<ICommentRestaurant, CommentRestaurant_Rep>();
 
 builder.Services.AddScoped<IScore, Score_Rep>();
 
+builder.Services.AddScoped<Ipayment, payment_Rep>();
+
 #endregion
 
 
@@ -148,6 +154,8 @@ builder.Services.AddScoped<Payment, ZarinPal.Class.Payment>();
 builder.Services.AddSingleton<ZarinPal.Class.Authority>();
 
 builder.Services.AddTransient<ZarinPal.Class.Transactions>();
+
+builder.Services.AddTransient<IHelpFunction , HelpFunction_Rep>();
 
 #endregion
 

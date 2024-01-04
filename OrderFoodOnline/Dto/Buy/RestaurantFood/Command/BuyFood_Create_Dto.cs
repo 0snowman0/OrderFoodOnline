@@ -2,7 +2,7 @@
 
 namespace OrderFoodOnline.Dto.Buy.RestaurantFood.Command
 {
-    public class BuyFood_Create_Dto : BaseDto_Dto
+    public class BuyFood_Create_Dto 
     {
         public int FoodId { get; set; } 
 
