@@ -8,6 +8,7 @@ using OrderFoodOnline.Dto.User.Delivery.Command;
 using OrderFoodOnline.Dto.User.user.Command;
 using OrderFoodOnline.Email;
 using OrderFoodOnline.generic;
+using OrderFoodOnline.Interface.Irepository.IAnalyes;
 using OrderFoodOnline.Interface.Irepository.IComment;
 using OrderFoodOnline.Interface.Irepository.IDelivery;
 using OrderFoodOnline.Interface.Irepository.IFood;
@@ -25,6 +26,7 @@ using OrderFoodOnline.Interface.Itools.IUserService;
 using OrderFoodOnline.Model.ConnectionToBank;
 using OrderFoodOnline.Model.Product.Food;
 using OrderFoodOnline.Model.User;
+using OrderFoodOnline.Repository.Analyes;
 using OrderFoodOnline.Repository.Comment;
 using OrderFoodOnline.Repository.Delivery;
 using OrderFoodOnline.Repository.Food;
@@ -121,6 +123,10 @@ builder.Services.AddScoped<ICommentRestaurant, CommentRestaurant_Rep>();
 builder.Services.AddScoped<IScore, Score_Rep>();
 
 builder.Services.AddScoped<Ipayment, payment_Rep>();
+
+builder.Services.AddScoped<IAnalyes, Analyes_Rep>();
+
+builder.Services.AddScoped<IProductAnalyes, ProductAnalyes_Rep>();
 
 #endregion
 

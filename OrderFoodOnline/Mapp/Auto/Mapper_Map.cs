@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using OrderFoodOnline.Dto.Analyes;
 using OrderFoodOnline.Dto.Comment.CommentFood.Command;
 using OrderFoodOnline.Dto.Comment.CommentFood.Quesreis;
 using OrderFoodOnline.Dto.Comment.CommentRestaurant.Command;
@@ -14,6 +15,7 @@ using OrderFoodOnline.Dto.T_Relation_T.DeliveryAndRestaurant.Command;
 using OrderFoodOnline.Dto.User.Delivery.Command;
 using OrderFoodOnline.Dto.User.Delivery.Quesries;
 using OrderFoodOnline.Dto.User.Restaurant.Quesries;
+using OrderFoodOnline.Model.Analyes;
 using OrderFoodOnline.Model.Comment;
 using OrderFoodOnline.Model.job.recruitment;
 using OrderFoodOnline.Model.Location;
@@ -96,7 +98,15 @@ namespace OrderFoodOnline.Mapp.Auto
             CreateMap<Score_En , Score_Create_Dto>().ReverseMap();
           
             CreateMap<Score_En , Restaurant_En>().ReverseMap();
-            
+
+            #endregion
+
+            #region Analyes
+
+            CreateMap<Analyes_En ,Analyes_Dto >().ReverseMap();
+
+            CreateMap<ProductAnalyes_En , ProductAnalyes_Dto>().ReverseMap();
+
             #endregion
 
         }

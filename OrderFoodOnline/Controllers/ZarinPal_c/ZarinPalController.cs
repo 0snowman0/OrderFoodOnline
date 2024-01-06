@@ -3,10 +3,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OrderFoodOnline.Dto;
 using OrderFoodOnline.Dto.Buy.RestaurantFood.Command;
+using OrderFoodOnline.Interface.Irepository.IAnalyes;
 using OrderFoodOnline.Interface.Irepository.IPayment;
 using OrderFoodOnline.Interface.Irepository.IUser;
 using OrderFoodOnline.Interface.Itools.HelpFunction;
 using OrderFoodOnline.Interface.Itools.IUserService;
+using OrderFoodOnline.Model.Analyes;
 using OrderFoodOnline.Model.Buy;
 using ZarinPal.Class;
 
@@ -23,6 +25,7 @@ namespace OrderFoodOnline.Controllers.ZarinPal_c
         private readonly Iuser _user;
         private readonly Ipayment _payment_rep;
         private readonly IHelpFunction _helpFunction;
+        private readonly IProductAnalyes _productAnalyes;
         public ZarinPalController
             (Payment payment,
             Authority authority,
@@ -30,7 +33,8 @@ namespace OrderFoodOnline.Controllers.ZarinPal_c
             IuserService userservice,
             Iuser user,
             Ipayment payment_rep,
-            IHelpFunction helpFunction)
+            IHelpFunction helpFunction,
+            IProductAnalyes productAnalyes )
         {
             var expose = new Expose();
 
@@ -41,6 +45,7 @@ namespace OrderFoodOnline.Controllers.ZarinPal_c
             _user = user;
             _payment_rep = payment_rep;
             _helpFunction = helpFunction;
+            _productAnalyes = productAnalyes;
         }
 
 
@@ -58,12 +63,25 @@ namespace OrderFoodOnline.Controllers.ZarinPal_c
                 return NotFound();
 
 
+            var NewProduct = new ProductAnalyes_En();
+            var NewProducts = new List<ProductAnalyes_En>();
+
             // Get the amount
             int totalAmount = 0;
             foreach (var buyFood_Create_Dto in buyFood_Create_Dtos)
             {
                 totalAmount += buyFood_Create_Dto.Amount;
+
+                //create new productEN
+                NewProduct.Amount = buyFood_Create_Dto.Amount;
+                NewProduct.FoodId = buyFood_Create_Dto.FoodId;
+                NewProduct.DateOfSale = DateTime.Now;
+                NewProduct.Restaurant_Id = buyFood_Create_Dto.RestaurantId;
+
+                NewProducts.Add(NewProduct);
             }
+
+
 
 
             //Add newPaymentInDatabase
@@ -91,6 +109,8 @@ namespace OrderFoodOnline.Controllers.ZarinPal_c
 
 
             await _payment_rep.Add(Payment_en);
+
+            await _productAnalyes.AddList(NewProducts);
 
             return Ok(Payment_en.TrackingCode);
             //send url 

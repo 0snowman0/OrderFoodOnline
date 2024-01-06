@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OrderFoodOnline.Model.Analyes;
 using OrderFoodOnline.Model.Buy;
 using OrderFoodOnline.Model.Comment;
 using OrderFoodOnline.Model.job.recruitment;
@@ -30,6 +31,8 @@ namespace OrderFoodOnline.Model.ConnectionToBank
         public DbSet<CommentRestaurant_En> commentRestaurant_Ens  { get; set; } = null!;
         public DbSet<Score_En> score_Ens  { get; set; } = null!;
         public DbSet<Payment_En> payment_Ens  { get; set; } = null!;
+        public DbSet<Analyes_En> analyes_Ens { get; set; } = null!;
+        public DbSet<ProductAnalyes_En> productAnalyes_Ens { get; set; } = null!;
 
     }
 }
