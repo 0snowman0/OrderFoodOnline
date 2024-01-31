@@ -4,6 +4,8 @@ using Newtonsoft.Json;
 using OrderFoodOnline.Controllers.ZarinPal_c;
 using OrderFoodOnline.Dto.Location.Command;
 using OrderFoodOnline.Interface.Irepository.ILocation;
+using OrderFoodOnline.Interface.IT_R_T.LocationAndRestaurant;
+using OrderFoodOnline.Interface.Itools.ImanageProgram.Istatus;
 using OrderFoodOnline.Interface.Itools.IUserService;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -17,12 +19,20 @@ namespace OrderFoodOnline.Controllers.LocationControllers
         private readonly IMapper _mapper;
         private readonly ILocation _location;
         private readonly IuserService _userservice;
+        private readonly ILocation_Restaurant _location_Restaurant;
+        private readonly Istatus _status;
 
-        public LocationController(IMapper mapper, ILocation location, IuserService userservice)
+        public LocationController(IMapper mapper, ILocation location, IuserService userservice, Istatus status)
         {
             _mapper = mapper;
             _location = location;
             _userservice = userservice;
+            _status = status;
+        }
+
+        public LocationController(ILocation_Restaurant location_Restaurant)
+        {
+            _location_Restaurant = location_Restaurant;
         }
 
 
@@ -58,6 +68,25 @@ namespace OrderFoodOnline.Controllers.LocationControllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+
+        [HttpPost("RestaurantAroundLocation")]
+        public async Task<ActionResult> RestaurantAroundLocation(double lat, double lon)
+        {
+            var locarionRestaurant = await _location_Restaurant.GetAll();
+
+            if (!locarionRestaurant.Any())
+                return NotFound(_status.ReturnStatus("", 404));
+
+            var lisDis = new List<double>();
+
+            foreach (var loc in locarionRestaurant)
+                lisDis.Add(_location.Distance(lat, lon, loc.location_En.Latitude, loc.location_En.Longitude));
+
+            lisDis.Sort();
+            var nearRestaurant = lisDis.Take(5);
+
+            return Ok(nearRestaurant);
         }
     }
 }

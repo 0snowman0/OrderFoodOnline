@@ -11,7 +11,5 @@ namespace OrderFoodOnline.Dto.User.Restaurant.Command
     {
         public string address { get; set; } = null!;
         public string? City { get; set; }
-
-        //public List<Food_Dto>? food_Ens { get; set; } 
     }
 }

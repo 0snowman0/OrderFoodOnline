@@ -168,11 +168,6 @@ namespace OrderFoodOnline.Controllers.ZarinPal_c
 
 
 
-
-
-
-
-
         #region comment
 
         //rax controller zarinpal
@@ -223,7 +218,6 @@ namespace OrderFoodOnline.Controllers.ZarinPal_c
         //}
 
         #endregion
-
 
     }
 }

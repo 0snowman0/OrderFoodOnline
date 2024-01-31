@@ -10,7 +10,7 @@ using System.Net;
 
 namespace OrderFoodOnline.Repository.Location
 {
-    public class Location_Rep : GenericRepository<Location_En>   , ILocation
+    public class Location_Rep : GenericRepository<Location_En>, ILocation
     {
         private readonly Context_En _context;
 
@@ -18,6 +18,16 @@ namespace OrderFoodOnline.Repository.Location
             :base(context)
         {
             _context = context;
+        }
+
+        public double Distance(double lat1, double lon1, double lat2, double lon2)
+        {
+            double radius = 6371; // شعاع زمین در کیلومتر
+            double dLat = (lat2 - lat1) * Math.PI / 180;
+            double dLon = (lon2 - lon1) * Math.PI / 180;
+            double a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) + Math.Cos(lat1) * Math.Cos(lat2) * Math.Sin(dLon / 2) * Math.Sin(dLon / 2);
+            double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+            return radius * c;
         }
 
         public async Task<string> Get_Location_User()
@@ -50,5 +60,7 @@ namespace OrderFoodOnline.Repository.Location
                 }
             }
         }
+
+
     }
 }

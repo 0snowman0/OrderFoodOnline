@@ -19,7 +19,6 @@ namespace OrderFoodOnline.Model.User
 
 
         //rel ... 
-
         public  ICollection<Food_En> food_Ens { get; set; } = new List<Food_En>();
         public  ICollection<Recruitment_En> recruitment_Ens{ get; set; } = new List<Recruitment_En>();
   
