@@ -22,6 +22,8 @@
 	  
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.25" />
 	  
+    <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.1.1" />
+	  
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.13" />
 	  
     <PackageReference Include="Microsoft.Azure.Functions.Worker.Sdk.Analyzers" Version="1.2.1" />

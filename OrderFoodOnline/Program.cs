@@ -60,6 +60,18 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddHttpContextAccessor();
 
 
+
+ void ConfigureServices(IServiceCollection services)
+{
+  // Add Swagger
+  services.AddSwaggerGen(c =>
+  {
+      c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+  });
+}
+
+
+
 #region Authorization
 builder.Services.AddSwaggerGen(options =>
 {
@@ -179,6 +191,10 @@ options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultConnection_
 //AutoMapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -189,6 +205,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 
 app.UseAuthorization();
 
